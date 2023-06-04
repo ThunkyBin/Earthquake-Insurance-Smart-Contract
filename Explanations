@@ -1,0 +1,20 @@
+The owner and premium variables are made public for visibility. The payoutAmount is kept private.
+
+The Insurance struct stores information about each insured user - their address, amount insured for, and an active flag.
+
+The insurances mapping associates each insured address with their Insurance struct. This allows us to store and retrieve information about each insured user.
+
+The InsurancePurchased and PayoutProcessed events are emitted when relevant actions are taken.
+
+The buyInsurance() function allows users to purchase insurance by paying the premium amount. It updates the insurances mapping to mark that user as insured.
+
+The processPayout() function allows the contract owner to payout funds to an insured user. 
+It requires the insured user to still be active, then sends the payoutAmount to the insured user's payable address. It then marks that user as inactive.
+
+The withdraw() function allows the contract owner to withdraw any excess funds from the contract's balance.
+
+Ownable.sol:
+
+This basic Ownable contract defines an owner address. It is inherited by the EarthquakeInsurance contract, which then gains an owner.
+
+The Ownable contract provides _owner() and onlyOwner modifier functions. These restrict certain actions to only the contract owner.
