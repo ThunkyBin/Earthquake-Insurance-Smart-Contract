@@ -1,3 +1,6 @@
+Aşağıdaki kod, "EarthquakeInsurance" adlı akıllı sözleşmeyi, bireylerin 1 ETH'lik sigorta kapsamı satın alabildiği ve sözleşme sahibinin deprem etkilenen sigortalılara 100 ETH tutarında ödeme yapabileceği şekilde güncellemektedir. Sözleşme olayları, satın alımları ve ödemeleri kaydetmek için kullanılırken, erişim kontrolleri ve ödenebilir adresler güvenlik ve şeffaflığı sağlar.
+
+```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
@@ -20,7 +23,7 @@ contract EarthquakeInsurance {
     constructor() { 
         owner = msg.sender;
         premium = 1 ether;
-        payoutAmount = 5 ether;
+        payoutAmount = 100 ether;
     }
     
     function buyInsurance() public payable {
@@ -45,3 +48,4 @@ contract EarthquakeInsurance {
         ownerPayable.transfer(address(this).balance);
     } 
 }
+```
