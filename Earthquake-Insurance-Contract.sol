@@ -17,6 +17,11 @@ contract EarthquakeInsurance {
     event InsurancePurchased(address indexed insured, uint256 amount);
     event PayoutProcessed(address indexed insured, uint256 amount);
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner");
+        _;
+    }
+
     constructor() {
         owner = msg.sender;
         premium = 1 ether;
@@ -24,15 +29,15 @@ contract EarthquakeInsurance {
     }
 
     function buyInsurance() public payable {
-        require(msg.value == premium);
+        require(msg.value == premium, "Incorrect premium");
         insurances[msg.sender] = Insurance(msg.sender, msg.value, true);
         emit InsurancePurchased(msg.sender, msg.value);
     }
 
-    function processPayout(address insured) public {
-        require(msg.sender == owner);
+    function processPayout(address insured) public onlyOwner {
         Insurance storage insurance = insurances[insured];
-        require(insurance.active);
+        require(insurance.active, "No active policy");
+        require(address(this).balance >= payoutAmount, "Insufficient contract balance");
 
         address payable insuredPayable = payable(insured);
         insuredPayable.transfer(payoutAmount);
@@ -41,8 +46,7 @@ contract EarthquakeInsurance {
         emit PayoutProcessed(insured, payoutAmount);
     }
 
-    function withdraw() public {
-        require(msg.sender == owner);
+    function withdraw() public onlyOwner {
         address payable ownerPayable = payable(owner);
         ownerPayable.transfer(address(this).balance);
     }
