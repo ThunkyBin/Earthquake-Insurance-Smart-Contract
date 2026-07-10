@@ -4,6 +4,16 @@ Solidity prototype for a simple earthquake insurance policy flow. Users can buy
 coverage by paying a fixed premium, and the contract owner can process payouts
 for active policy holders.
 
+## Quick Start
+
+```bash
+npm install
+npm test
+```
+
+`npm run compile` writes ABI and bytecode artifacts to `build/`. GitHub Actions
+runs the smoke test automatically for every push and pull request.
+
 ## Contract
 
 `Earthquake-Insurance-Contract.sol` defines `EarthquakeInsurance`.

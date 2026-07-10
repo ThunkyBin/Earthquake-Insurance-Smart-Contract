@@ -1,0 +1,13 @@
+{
+  "name": "earthquake-insurance-smart-contract",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Runnable earthquake insurance contract prototype.",
+  "scripts": {
+    "compile": "node scripts/compile.js",
+    "test": "node test/smoke.js"
+  },
+  "devDependencies": {
+    "solc": "0.8.30"
+  }
+}
